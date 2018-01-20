@@ -1,3 +1,4 @@
+<% if user_signed_in? %>
 <button type="button" class="btn btn-primary btn-lg mp-btn" data-toggle="modal" data-target="#myModal">
   <i class="fa fa-pencil-square-o" aria-hidden="true"></i> Add Idea
 </button>
@@ -23,7 +24,7 @@
     </div>
   </div>
 </div>
-
+<% end %>
 <% @ideas.each do |idea| %>
 <div class="panel panel-default">
 	<div class="panel-body">
@@ -32,8 +33,10 @@
 		  <small>By <%= idea.author %></small>
 		</blockquote>
 		<br>
+    <% if idea.user == current_user %>
 		<%= link_to 'Revise', edit_idea_path(idea), class: 'btn btn-sm btn-success' %>
 		<%= link_to 'Delete', idea_path(idea), method: :delete, class: 'btn btn-sm btn-danger', data: {confirm: "Are you sure?"} %>
+    <% end %>
 	</div>
 </div>
 <% end %>

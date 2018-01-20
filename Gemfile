@@ -40,6 +40,9 @@ gem 'simple_form'
 # paginate
 gem 'will_paginate', '~> 3.1.0'
 
+# User Athentication
+gem 'devise'
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 

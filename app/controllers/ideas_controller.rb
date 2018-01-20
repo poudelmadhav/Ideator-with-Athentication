@@ -1,10 +1,12 @@
 class IdeasController < ApplicationController
+	before_action :authenticate_user!, only: [:new, :create]
+	before_action :is_owner?, only: [:edit, :update, :destroy]
 	def index
 		@ideas = Idea.order("created_at DESC").paginate(:page => params[:page])
 	end
 
-	def create    
-	    @idea = Idea.create(idea_params)
+	def create
+	    @idea = current_user.ideas.create(idea_params)
 	    if @idea.valid?
 	      flash[:success] = "Your idea has been posted!"
 	    else
@@ -38,6 +40,10 @@ class IdeasController < ApplicationController
 	private
 
 	def idea_params
-	  params.require(:idea).permit(:description, :author)
+	  params.require(:idea).permit(:description, :author, :user_id)
+	end
+
+	def is_owner?
+	  redirect_to root_path if Idea.find(params[:id]).user != current_user
 	end
 end
