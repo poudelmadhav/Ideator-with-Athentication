@@ -1,0 +1,19 @@
+<h3>You have
+<%= pluralize(@user.ideas.count, 'post') %> Posts in total: </h3>
+</br>
+</br>
+
+<% @user.ideas.each do |idea| %>
+<div class="panel panel-default">
+	<div class="panel-body">
+	  	<blockquote>
+		  <p><%= idea.description %></p>
+		</blockquote>
+		<br>
+    <% if idea.user == current_user %>
+		<%= link_to 'Revise', edit_idea_path(idea), class: 'btn btn-sm btn-success' %>
+		<%= link_to 'Delete', idea_path(idea), method: :delete, class: 'btn btn-sm btn-danger', data: {confirm: "Are you sure?"} %>
+    <% end %>
+	</div>
+</div>
+<% end %>
