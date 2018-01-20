@@ -30,6 +30,16 @@ gem 'jbuilder', '~> 2.5'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
+# styling the site
+gem 'bootstrap-sass', '~> 3.3.7'
+gem 'jquery-rails'
+
+# form
+gem 'simple_form'
+
+# paginate
+gem 'will_paginate', '~> 3.1.0'
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
