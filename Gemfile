@@ -43,6 +43,9 @@ gem 'will_paginate', '~> 3.1.0'
 # User Athentication
 gem 'devise'
 
+# Admin Interface
+gem 'activeadmin'
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
