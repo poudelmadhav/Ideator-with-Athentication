@@ -282,7 +282,7 @@ ActiveAdmin.setup do |config|
   # By default, the footer shows the current Active Admin version. You can
   # override the content of the footer here.
   #
-  config.footer = 'Designed by Madhav Paudel'
+  config.footer = "'Designed by Madhav Paudel'"
 
   # == Sorting
   #
