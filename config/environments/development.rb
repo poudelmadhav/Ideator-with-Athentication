@@ -27,7 +27,7 @@ Rails.application.configure do
   end
 
   # Don't care if the mailer can't send.
-  config.action_mailer.raise_delivery_errors = false
+  # config.action_mailer.raise_delivery_errors = false
 
   config.action_mailer.perform_caching = false
 
@@ -44,6 +44,22 @@ Rails.application.configure do
 
   # Suppress logger output for asset requests.
   config.assets.quiet = true
+
+  # email configuration
+  config.action_mailer.raise_delivery_errors = true
+
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.perform_deliveries = true
+  config.action_mailer.default_url_options = { :host => 'localhost:3000' }
+  config.action_mailer.smtp_settings = {
+  :address => "smtp.gmail.com",
+  :port => 587,
+  :domain => "mail.google.com",
+  :user_name => "mponlineapp@gmail.com",
+  :password => "Achyut@!12",
+  :authentication => :plain,
+  :enable_starttls_auto => true
+  }
 
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
