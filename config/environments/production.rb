@@ -11,7 +11,7 @@ Rails.application.configure do
   config.eager_load = true
 
   # Full error reports are disabled and caching is turned on.
-  config.consider_all_requests_local       = true
+  config.consider_all_requests_local       = false
   config.action_controller.perform_caching = true
 
 
@@ -26,8 +26,8 @@ Rails.application.configure do
   :address => "smtp.gmail.com",
   :port => 587,
   :domain => "mail.google.com",
-  :user_name => "mponlineapp@gmail.com",
-  :password => "Achyut@!12",
+  :user_name => ENV["user_name"],
+  :password => ENV["password"],
   :authentication => :plain,
   :enable_starttls_auto => true
   }

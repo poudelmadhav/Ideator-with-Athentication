@@ -46,6 +46,9 @@ gem 'devise'
 # Admin Interface
 gem 'activeadmin'
 
+# Use secure for passwords
+gem "figaro"
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
