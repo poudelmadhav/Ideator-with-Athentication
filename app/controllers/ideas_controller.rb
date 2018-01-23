@@ -2,7 +2,7 @@ class IdeasController < ApplicationController
 	before_action :authenticate_user!, only: [:new, :create]
 	before_action :is_owner?, only: [:edit, :update, :destroy]
 	def index
-		@ideas = Idea.order("created_at DESC").paginate(:page => params[:page])
+		@ideas = Idea.order("created_at DESC").paginate(:page => params[:page]).includes(:user)
 	end
 
 	def create
