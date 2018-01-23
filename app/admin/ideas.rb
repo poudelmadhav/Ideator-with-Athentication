@@ -1,6 +1,6 @@
 ActiveAdmin.register Idea do
 	menu priority: 3
-	permit_params :user, :description, :author
+	permit_params :user, :description, :author, :user_id
 	
 	filter :user
 	filter :photo
