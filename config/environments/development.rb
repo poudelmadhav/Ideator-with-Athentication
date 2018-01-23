@@ -46,7 +46,7 @@ Rails.application.configure do
   config.assets.quiet = true
 
   # email configuration
-  config.action_mailer.raise_delivery_errors = false
+  config.action_mailer.raise_delivery_errors = true
 
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.perform_deliveries = true
@@ -56,7 +56,7 @@ Rails.application.configure do
   :address => "smtp.gmail.com",
   :port => 587,
   :domain => "mail.google.com",
-  :user_name => ENV["user_name"],
+  :user_name => "mponlineapp@gmail.com",
   :password => ENV["password"],
   :authentication => :plain,
   :enable_starttls_auto => true
