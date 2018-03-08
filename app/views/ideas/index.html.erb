@@ -1,51 +1,55 @@
-<% if user_signed_in? %>
-<button type="button" class="btn btn-primary btn-lg mp-btn" data-toggle="modal" data-target="#myModal">
-  <i class="fa fa-pencil-square-o" aria-hidden="true"></i> Add Idea
-</button>
+<div class="row">
+  <div class="col-xs-12 col-md-6 col-md-offset-3">
+    <% if user_signed_in? %>
+    <button type="button" class="btn btn-success btn-lg btn-block mp-margin" data-toggle="modal" data-target="#myModal">
+      <i class="fa fa-pencil-square-o" aria-hidden="true"></i> Add Idea
+    </button>
 
 
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-        <h4 class="modal-title" id="myModalLabel">Enter new Idea</h4>
-      </div>
-      <%= simple_form_for Idea.new do |f| %>
-        <div class="modal-body">
-          <%= f.input :description %>
-          <%= f.input :author %>
-        </div>      
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          <%= f.submit 'Submit', class: 'btn btn-primary' %>
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+            <h4 class="modal-title" id="myModalLabel">Enter new Idea</h4>
+          </div>
+          <%= simple_form_for Idea.new do |f| %>
+            <div class="modal-body">
+              <%= f.input :description %>
+              <%= f.input :author, label: 'Remarks' %>
+            </div>      
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              <%= f.submit 'Submit', class: 'btn btn-success' %>
+            </div>
+          <% end %>
         </div>
-      <% end %>
+      </div>
+    </div>
+    <% else %>
+      <div class="login-notice">
+        <p class="alert alert-info alert-dismissible text-center"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>Please <%= link_to 'Log In', new_user_session_path, class: 'alert-link' %> or <%= link_to 'Sign Up', new_user_registration_path, class: 'alert-link' %> to post your Idea.</p>
+      </div>
+    <% end %>
+
+    <% @ideas.each do |idea| %>
+    <div class="panel panel-success">
+    	<div class="panel-body">
+    	  	<blockquote>
+    		  <p><%= idea.description %></p>
+    		  <small>By <%= idea.user_name %></small>
+    		</blockquote>
+    		<br>
+        <% if idea.user == current_user %>
+    		<%= link_to 'Revise', edit_idea_path(idea), class: 'btn btn-sm btn-success' %>
+    		<%= link_to 'Delete', idea_path(idea), method: :delete, class: 'btn btn-sm btn-danger', data: {confirm: "Are you sure?"} %>
+        <% end %>
+    	</div>
+    </div>
+    <% end %>
+
+    <div class = "text-center">
+      <%= will_paginate @ideas %>
     </div>
   </div>
-</div>
-<% else %>
-  <div class="login-notice">
-    <p class="alert alert-info alert-dismissible text-center"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>Please <%= link_to 'Log In', new_user_session_path, class: 'alert-link' %> or <%= link_to 'Sign Up', new_user_registration_path, class: 'alert-link' %> to post your Idea.</p>
-  </div>
-<% end %>
-
-<% @ideas.each do |idea| %>
-<div class="panel panel-default">
-	<div class="panel-body">
-	  	<blockquote>
-		  <p><%= idea.description %></p>
-		  <small>By <%= idea.user_name %></small>
-		</blockquote>
-		<br>
-    <% if idea.user == current_user %>
-		<%= link_to 'Revise', edit_idea_path(idea), class: 'btn btn-sm btn-success' %>
-		<%= link_to 'Delete', idea_path(idea), method: :delete, class: 'btn btn-sm btn-danger', data: {confirm: "Are you sure?"} %>
-    <% end %>
-	</div>
-</div>
-<% end %>
-
-<div class = "text-center">
-  <%= will_paginate @ideas %>
 </div>
