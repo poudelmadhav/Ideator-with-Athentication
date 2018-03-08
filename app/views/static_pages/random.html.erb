@@ -1,0 +1,28 @@
+<div class="row">
+	<div class="col-xs-12 col-md-6 col-md-offset-3">
+		<% if @idea.present? %>
+		  <%= link_to 'Inspire Me', random_path, class: 'btn btn-success btn-block' %>
+		    
+		  <div class="panel panel-success">
+		    <div class="panel-body">
+		      <blockquote>
+		        <p><%= @idea.description %></p>
+		        <small>by <%= @idea.user_name %></small>
+		      </blockquote>
+		       
+		      <br>
+		      <div class="btn-group" role="group">
+		        <% if @idea.user == current_user %>
+		    		<%= link_to 'Revise', edit_idea_path(@idea), class: 'btn btn-sm btn-success' %>
+		    		<%= link_to 'Delete', idea_path(@idea), method: :delete, class: 'btn btn-sm btn-danger', data: {confirm: "Are you sure?"} %>
+		        <% end %>
+		      </div>
+
+		    </div>
+		  </div>
+		  <% else %>
+		  <h4>No ideas have been shared. Add one <%= link_to 'here', root_path %></h4>
+
+		<% end %>
+	</div>
+</div>
