@@ -14,24 +14,6 @@ Rails.application.configure do
   config.consider_all_requests_local       = false
   config.action_controller.perform_caching = true
 
-
-  # email configuration
-  config.action_mailer.raise_delivery_errors = true
-
-  config.action_mailer.delivery_method = :smtp
-  config.action_mailer.perform_deliveries = true
-  config.action_mailer.default :charset => "utf-8"
-  config.action_mailer.default_url_options = { :host => 'https://mp-ideator.herokuapp.com' }
-  config.action_mailer.smtp_settings = {
-  :address => "smtp.gmail.com",
-  :port => 587,
-  :domain => "mail.google.com",
-  :user_name => "mponlineapp@gmail.com",
-  :password => ENV["password"],
-  :authentication => :plain,
-  :enable_starttls_auto => true
-  }
-
   # Attempt to read encrypted secrets from `config/secrets.yml.enc`.
   # Requires an encryption key in `ENV["RAILS_MASTER_KEY"]` or
   # `config/secrets.yml.key`.
@@ -104,7 +86,22 @@ Rails.application.configure do
     config.logger    = ActiveSupport::TaggedLogging.new(logger)
   end
 
+  # Mailer settings
+  config.action_mailer.raise_delivery_errors = false
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.perform_deliveries = true
+  config.action_mailer.default :charset => "utf-8"
+  config.action_mailer.smtp_settings = {
+    user_name: ENV.fetch('SMTP_USERNAME', nil),
+    password: ENV.fetch('SMTP_PASSWORD', nil),
+    domain: 'poudelmadhav.com.np',
+    address: 'smtp-relay.brevo.com',
+    port: 587,
+    authentication: :plain,
+    enable_starttls_auto: true
+  }
+
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
-  config.action_mailer.default_url_options = { :host => "https://mp-ideator.herokuapp.com" }
+  config.action_mailer.default_url_options = { :host => "https://ideator.paudelmadhav.com.np" }
 end
